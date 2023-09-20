@@ -23,7 +23,15 @@ class MonoT5ReRanker(TransformerBase):
                  verbose=True):
         self.verbose = verbose
         self.batch_size = batch_size
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+        if torch.cuda.is_available():
+            device = "cuda"
+        elif torch.backends.mps.is_available():
+            device = "mps"
+        else:
+            device = "cpu"
+
+        self.device = torch.device(device)
         self.tokenizer = T5Tokenizer.from_pretrained(tok_model)
         self.model_name = model
         self.model = T5ForConditionalGeneration.from_pretrained(model)
@@ -76,7 +84,15 @@ class DuoT5ReRanker(TransformerBase):
                  agg='sum'):
         self.verbose = verbose
         self.batch_size = batch_size
-        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+        if torch.cuda.is_available():
+            device = "cuda"
+        elif torch.backends.mps.is_available():
+            device = "mps"
+        else:
+            device = "cpu"
+
+        self.device = torch.device(device)
         self.tokenizer = T5Tokenizer.from_pretrained(tok_model)
         self.model_name = model
         self.model = T5ForConditionalGeneration.from_pretrained(model)
