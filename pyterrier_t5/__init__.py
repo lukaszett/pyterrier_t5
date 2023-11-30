@@ -46,7 +46,7 @@ class MonoT5ReRanker(TransformerBase):
         self.REL = self.tokenizer.encode("true")[0]
         self.NREL = self.tokenizer.encode("false")[0]
 
-    def __str__(self):
+    def __repr__(self):
         return f"MonoT5({self.model_name})"
 
     def transform(self, run):
@@ -120,7 +120,7 @@ class DuoT5ReRanker(TransformerBase):
         assert agg == 'sum', 'DuoT5ReRanker only supports sum aggregation mode at this time'
         self.agg = agg
 
-    def __str__(self):
+    def __repr__(self):
         return f"DuoT5({self.model_name})"
 
     def transform(self, run):
